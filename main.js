@@ -13,9 +13,25 @@ import {
   FluxoGerarRelatorio,
   FluxoGerarRelatorioEspecifico
 } from './src/modules/fluxos.js';
-const tokensPorVU = {};
 
-// Configurações do teste
+const tokensPorVU = {}; // cache de tokens por VU
+
+// Função utilitária para autenticar
+function autenticarUsuario() {
+  const indiceVU = __VU;
+  const usuarioBase = USUARIOS_VIRTUAIS[(indiceVU - 1) % USUARIOS_VIRTUAIS.length];
+
+  if (!tokensPorVU[indiceVU]) {
+    const token = login(usuarioBase.username, usuarioBase.password);
+    tokensPorVU[indiceVU] = token;
+  }
+
+  return {
+    usuarioBase,
+    token: tokensPorVU[indiceVU],
+  };
+}
+
 export const options = {
   stages: [
     { duration: '10s', target: 10 },
@@ -25,36 +41,11 @@ export const options = {
     { duration: '15s', target: 50 },
     { duration: '60s', target: 50 },
     { duration: '30s', target: 0 },
-  ]/*,
-  thresholds: {
-    http_req_duration: ['p(99)<50'],
-  },*/
+  ]
 };
-/*
-export let options = {
-  vus: 40,
-  duration: TEMPO_DURACAO_TESTE
-};*/
 
-// Função principal do teste
 export default async function () {
-  const valorMaximo = USUARIOS_VIRTUAIS.length;
-  const indiceAleatorio = Math.floor(Math.random() * valorMaximo);
-  const tempo = '1s';
-
-  const indiceVU = __VU;
-  const usuarioBase = USUARIOS_VIRTUAIS[(indiceVU - 1) % USUARIOS_VIRTUAIS.length];
-
-  if (!tokensPorVU[indiceVU]) {
-    //console.log(`[LOGIN] VU ${indiceVU} logando como ${usuarioBase.username}`);
-    const token = login(usuarioBase.username, usuarioBase.password);
-    tokensPorVU[indiceVU] = token;
-  }
-
-  const usuario = {
-    usuarioBase,
-    token: tokensPorVU[indiceVU]
-  };
+  const usuario = autenticarUsuario();
 
   //FluxoAutenticacao(usuario); agora tem limite de conexões simultâneas
   FluxoConsultarClientes(usuario);

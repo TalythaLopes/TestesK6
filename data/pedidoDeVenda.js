@@ -1,3 +1,6 @@
+/*
+  formato de um pedido de venda
+*/
 export const bodyPedidoDeVenda = {
   codigo: 1240321,
   empresa: 27,

@@ -1,3 +1,6 @@
+/*
+  formato de um relatório
+*/
 export const bodyGerarRelatorio = [
   {
     id: "embutirFontes",
