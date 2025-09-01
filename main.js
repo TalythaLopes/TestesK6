@@ -1,61 +1,76 @@
 // k6 run --insecure-skip-tls-verify main.js
 //k6.exe run --insecure-skip-tls-verify --out web-dashboard=export=test-report.html .\main.js
-import { login } from './src/services/auth.js';
-import { USUARIOS_VIRTUAIS } from './config/env.js';
-import {
-  FluxoAutenticacao,
-  FluxoEdicaoCliente,
-  FluxoConsultarClientes,
-  FluxoExcluirPedidoVenda,
-  FluxoIncluirPedidoVenda,
-  FluxoDuplicarPedidoVenda,
-  FluxoConsultarIndicadores,
-  FluxoGerarRelatorio,
-  FluxoGerarRelatorioEspecifico
-} from './src/modules/fluxos.js';
-
-const tokensPorVU = {}; // cache de tokens por VU
-
-// Função utilitária para autenticar
-function autenticarUsuario() {
-  const indiceVU = __VU;
-  const usuarioBase = USUARIOS_VIRTUAIS[(indiceVU - 1) % USUARIOS_VIRTUAIS.length];
-
-  if (!tokensPorVU[indiceVU]) {
-    const token = login(usuarioBase.username, usuarioBase.password);
-    tokensPorVU[indiceVU] = token;
-  }
-
-  return {
-    usuarioBase,
-    token: tokensPorVU[indiceVU],
-  };
-}
+import { getUsuarioAutenticado } from './src/util/autenticarUsuario.js';
+import * as Fluxos from './src/modules/fluxos.js';
+import vendedorScenario from './src/scenarios/vendedor.js';
+import analistaScenario from './src/scenarios/analista.js';
+import adminScenario from './src/scenarios/admin.js';
+import smokeScenario from './src/scenarios/smoke.js';
 
 export const options = {
-  stages: [
-    { duration: '10s', target: 10 },
-    { duration: '5s', target: 20 },
-    { duration: '10s', target: 30 },
-    { duration: '3s', target: 40 },
-    { duration: '15s', target: 50 },
-    { duration: '60s', target: 50 },
-    { duration: '30s', target: 0 },
-  ]
+  scenarios: {
+    vendedor: {
+      executor: 'ramping-vus',
+      exec: 'vendedor',
+      startVUs: 0,
+      stages: [
+        { duration: '20s', target: 20 },
+        { duration: '10s', target: 30 },
+        { duration: '120s', target: 30 },
+        { duration: '20s', target: 0 },
+      ],
+      tags: { tipo_usuario: 'vendedor' },
+    },
+    analista: {
+      executor: 'ramping-vus',
+      exec: 'analista',
+      startVUs: 5,
+      stages: [
+        { duration: '60s', target: 5 },
+        { duration: '10s', target: 0 },
+      ],
+      tags: { tipo_usuario: 'analista' },
+    },
+    admin: {
+      executor: 'ramping-vus',
+      exec: 'admin',
+      startVUs: 0,
+      stages: [
+        { duration: '5s', target: 2 },
+        { duration: '10s', target: 4 },
+        { duration: '60s', target: 4 },
+        { duration: '5s', target: 0 },
+      ],
+      tags: { tipo_usuario: 'admin' },
+    }/*,
+    smoke: {
+      executor: 'per-vu-iterations',
+      exec: 'smoke',
+      vus: 1,
+      iterations: 1,
+      maxDuration: '30s',
+      tags: { tipo_teste: 'smoke' },
+    }*/
+  }
 };
 
-export default async function () {
-  const usuario = autenticarUsuario();
-
-  //FluxoAutenticacao(usuario); agora tem limite de conexões simultâneas
-  FluxoConsultarClientes(usuario);
-  FluxoEdicaoCliente(usuario);
-  FluxoIncluirPedidoVenda(usuario);
-  FluxoExcluirPedidoVenda(usuario);
-  FluxoDuplicarPedidoVenda(usuario);
-  FluxoConsultarIndicadores(usuario);
-  //FluxoGerarRelatorio(usuario);
-  FluxoGerarRelatorioEspecifico(usuario);
-  //obterLog(usuario);
-  //sleep(tempo);
+// Mapear as funções chamadas por cada cenário
+export async function vendedor() {
+  const usuario = getUsuarioAutenticado();
+  await vendedorScenario(usuario);
 }
+
+export async function analista() {
+  const usuario = getUsuarioAutenticado();
+  await analistaScenario(usuario);
+}
+
+export async function admin() {
+  const usuario = getUsuarioAutenticado();
+  await adminScenario(usuario);
+}
+/*
+export async function smoke() {
+  const usuario = getUsuarioAutenticado();
+  await smokeScenario(usuario);
+}*/
