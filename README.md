@@ -1,4 +1,4 @@
-# 🧪 Testes de Performance com K6
+# <p align="center"> 🧪 Testes de Performance com K6 </p>
 
 ## Resumo 
 Este repositório contém uma suíte de **testes de performance** utilizando o [K6.io](https://k6.io/). O objetivo é simular fluxos reais de uso da aplicação, garantindo **confiabilidade, escalabilidade e estabilidade** da API do WebService sob diferentes cenários. O **K6** é uma ferramenta de código aberto, escrita em Go, mas que permite a implementação de testes usando **JavaScript** tornando mais acessível e flexível para times de desenvolvimento.  
@@ -66,10 +66,11 @@ A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil
 
 ## Ideias Futuras
 
-- **Integrar** com Grafana + InfluxDB para monitoramento em tempo real
+- **Integrar** com Grafana para monitoramento em tempo real
 - **Implementar** notificações automáticas em caso de falha (Teams)
 - **Automatizar** execução em pipelines CI/CD
 - **Adicionar** testes de pico, imersão e API para análises mais completas
 - **Estudar** e **implementar** geração de relatórios que se autoincrementam a cada execução dos testes
 - **Permitir** cenários parametrizados com arquivos .env ou JSON
 - **Adicionar** testes de regressão de performance para para comparação automática com execuções anteriores
+
