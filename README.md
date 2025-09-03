@@ -58,11 +58,11 @@ O projeto está em desenvolvimento e o foco principal é avaliar a performance d
 ## Tecnologias Utilizadas
 <p align="center">
   <a href="https://k6.io/"><img src="https://img.shields.io/badge/K6.io-7D64FF?style=for-the-badge&logo=k6&logoColor=white" alt="K6"/></a>
-  <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/></a>
-  <a href="https://grafana.com/"><img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana"/></a>
+  <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-FFCA28?style=for-the-badge&logo=javascript&logoColor=181818" alt="JavaScript"/></a>
+  <a href="https://grafana.com/"><img src="https://img.shields.io/badge/Grafana-FF671D?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana"/></a>
 </p>
 
-A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil integração com pipelines de CI/CD, além de possuir **relatórios detalhados** e suporte a **cenários personalizados**. Linguagem de script foi escolhida por ser familiar à equipe e ter suporte nativo no K6. O uso do Grafana foi planejado para análise visual das métricas, permitindo dashboards em tempo real. 
+A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil integração com pipelines de CI/CD, além de possuir **relatórios detalhados** e suporte a **cenários personalizados**. Linguagem de script foi escolhida por ser **familiar à equipe** e ter **suporte nativo** no K6. O uso do Grafana foi planejado para **análise visual das métricas**, permitindo dashboards em tempo real. 
 
 ## Ideias Futuras
 
@@ -73,5 +73,6 @@ A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil
 - **Estudar** e **implementar** geração de relatórios que se autoincrementam a cada execução dos testes
 - **Permitir** cenários parametrizados com arquivos .env ou JSON
 - **Adicionar** testes de regressão de performance para para comparação automática com execuções anteriores
+
 
 
