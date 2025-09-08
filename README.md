@@ -67,11 +67,11 @@ A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil
 ## Ideias Futuras (ordenadas por prioridade - MosCoW)
 
 ### Prioridade Máxima (Must Have)
-- **Adicionar testes de pico, imersão e API para análises mais completas**
+- **Adicionar testes de pico, imersão e API para análises mais completas**  
   → Essencial para validar o comportamento da aplicação em cenários extremos e obter insights mais ricos da performance.
 - **Permitir cenários parametrizados com arquivos `.env` ou JSON**  
   → Facilita a manutenção, evita mudanças manuais no código e aumenta a reutilização.
-- **Estudar e implementar geração de relatórios que se autoincrementam**
+- **Estudar e implementar geração de relatórios que se autoincrementam**  
   → Essencial para acompanhar a evolução da performance ao longo do tempo.
 
 ### Prioridade Média (Should Have)
@@ -85,3 +85,4 @@ A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil
   → Importante para evolução contínua, mas depende primeiro dos relatórios incrementais estarem funcionando.  
 - **Automatizar execução em pipelines CI/CD**  
   → Garante que os testes rodem de forma contínua, integrando qualidade ao fluxo de desenvolvimento.
+
