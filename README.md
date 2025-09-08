@@ -6,12 +6,12 @@ Este repositório contém uma suíte de **testes de performance** utilizando o [
 O projeto está em desenvolvimento e o foco principal é avaliar a performance da aplicação e identificar possíveis gargalos. Este é um protótipo em evolução, mas já pode ser utilizado como base para cenários de testes.
 
 ## Funcionalidades  
-- 🔥 **Testes de fumaça** para validar fluxos críticos rapidamente  
-- 💥 **Testes de estresse** simulando um número de usuários virtuais bem acima do esperado
-- 📈 **Testes de carga** simulando múltiplos usuários virtuais
-- 🔧 **Cenários modulares**: cada fluxo de negócio tem seu próprio arquivo
-- 🧩 Arquitetura extensível: fácil adicionar novos cenários de negócio
-- 📊 Coleta de métricas detalhadas: tempos de resposta, throughput e taxa de erros
+- **Testes de fumaça** para validar fluxos críticos rapidamente  
+- **Testes de estresse** simulando um número de usuários virtuais bem acima do esperado
+- **Testes de carga** simulando múltiplos usuários virtuais
+- **Cenários modulares**: cada fluxo de negócio tem seu próprio arquivo
+- **Arquitetura extensível**: fácil adicionar novos cenários de negócio
+- **Coleta de métricas detalhadas**: tempos de resposta, throughput e taxa de erros
 
 ## Instruções  
 1. **Instalação do K6**  
@@ -64,15 +64,24 @@ O projeto está em desenvolvimento e o foco principal é avaliar a performance d
 
 A escolha das tecnologias foi motivada pelo K6 ser **leve, rápida** e de fácil integração com pipelines de CI/CD, além de possuir **relatórios detalhados** e suporte a **cenários personalizados**. Linguagem de script foi escolhida por ser **familiar à equipe** e ter **suporte nativo** no K6. O uso do Grafana foi planejado para **análise visual das métricas**, permitindo dashboards em tempo real. 
 
-## Ideias Futuras
+## Ideias Futuras (ordenadas por prioridade - MosCoW)
 
-- **Integrar** com Grafana para monitoramento em tempo real
-- **Implementar** notificações automáticas em caso de falha (Teams)
-- **Automatizar** execução em pipelines CI/CD
-- **Adicionar** testes de pico, imersão e API para análises mais completas
-- **Estudar** e **implementar** geração de relatórios que se autoincrementam a cada execução dos testes
-- **Permitir** cenários parametrizados com arquivos .env ou JSON
-- **Adicionar** testes de regressão de performance para para comparação automática com execuções anteriores
+### Prioridade Máxima (Must Have)
+- **Adicionar testes de pico, imersão e API para análises mais completas**
+  → Essencial para validar o comportamento da aplicação em cenários extremos e obter insights mais ricos da performance.
+- **Permitir cenários parametrizados com arquivos `.env` ou JSON**  
+  → Facilita a manutenção, evita mudanças manuais no código e aumenta a reutilização.
+- **Estudar e implementar geração de relatórios que se autoincrementam**
+  → Essencial para acompanhar a evolução da performance ao longo do tempo.
 
+### Prioridade Média (Should Have)
+- **Integrar com Grafana para monitoramento em tempo real**  
+  → Permite análise visual e dashboards, ótimo para times acompanharem os testes em execução.  
+- **Implementar notificações automáticas em caso de falha (Teams)**  
+  → Agiliza a comunicação de falhas, mas depende do pipeline e monitoramento estarem prontos.  
 
-
+### Prioridade Baixa (Could Have)
+- **Adicionar testes de regressão de performance**  
+  → Importante para evolução contínua, mas depende primeiro dos relatórios incrementais estarem funcionando.  
+- **Automatizar execução em pipelines CI/CD**  
+  → Garante que os testes rodem de forma contínua, integrando qualidade ao fluxo de desenvolvimento.
